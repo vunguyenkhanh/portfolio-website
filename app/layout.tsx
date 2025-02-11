@@ -1,3 +1,4 @@
+import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import '@/styles/globals.css';
@@ -27,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -35,7 +38,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          {children}
+          <main className="flex-grow pt-16">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
