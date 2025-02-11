@@ -1,9 +1,10 @@
 'use client';
 
+import { SocialLinks } from '@/components/shared/social-links';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { SocialLinks } from '@/components/shared/social-links';
+import Link from 'next/link';
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -48,18 +49,19 @@ export function HeroSection() {
           </motion.p>
 
           <motion.div variants={fadeIn} className="flex items-center gap-4 mt-8">
-            <motion.a
-              href="#contact"
-              className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-full hover:bg-primary/90 transition-all hover:gap-4"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Let&apos;s Talk
-              <ArrowRight className="w-4 h-4" />
-            </motion.a>
+            <Link href="/contact">
+              <motion.div
+                className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 rounded-full transition-all hover:gap-4"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Let&apos;s Talk
+                <ArrowRight className="w-4 h-4" />
+              </motion.div>
+            </Link>
             <motion.a
               href="/CV_VuNguyenKhanh.pdf"
-              className="group flex items-center gap-2 px-6 py-3 border border-border hover:border-primary/50 hover:bg-primary/5 rounded-full transition-all"
+              className="group flex items-center gap-2 px-6 py-3 border border-border hover:border-primary/50 hover:bg-primary/5 dark:hover:bg-primary/10 rounded-full transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
