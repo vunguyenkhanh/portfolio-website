@@ -1,16 +1,31 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { Logo } from './logo';
 import { MobileNavigation, Navigation } from './navigation';
 import { ThemeToggle } from './theme-toggle';
 
 export function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollY } = useScroll();
+
+  useEffect(() => {
+    const unsubscribe = scrollY.on('change', (latest) => {
+      setIsScrolled(latest > 0);
+    });
+    return () => unsubscribe();
+  }, [scrollY]);
+
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/40"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-background/80 backdrop-blur-sm shadow-sm'
+          : 'bg-background/50 backdrop-blur-none'
+      }`}
     >
       <div className="container mx-auto px-4 h-16">
         <div className="flex items-center justify-between h-full">
@@ -21,9 +36,11 @@ export function Header() {
             <ThemeToggle />
             <MobileNavigation />
 
-            <a
+            <motion.a
               href="#contact"
               className="hidden md:flex items-center gap-2 px-6 py-2 text-sm font-medium bg-primary hover:bg-primary/90 rounded-full transition-colors text-white dark:text-primary dark:bg-white/10 dark:hover:bg-white/20"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Let&apos;s Talk
               <svg
@@ -38,7 +55,7 @@ export function Header() {
                   clipRule="evenodd"
                 />
               </svg>
-            </a>
+            </motion.a>
           </div>
         </div>
       </div>
