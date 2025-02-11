@@ -76,6 +76,18 @@ Công Nghệ:
    - Database: Firebase.
    - SEO: Next.js hỗ trợ tốt cho SEO với khả năng render phía server.
 
+Color Palette:
+    #03045E
+    #023E8A
+    #0077B6
+    #0096C7
+    #00B4D8
+    #48CAE4
+    #90E0EF
+    #ADE8F4
+    #CAF0F8
+    #FFFFFF
+
 Lưu ý:
    - Thiết kế nên dễ nhìn, dễ sử dụng và đặc biệt là dễ tương tác với người dùng.
    - Trang web cần phải dễ dàng cập nhật và bảo trì khi cần thiết.
