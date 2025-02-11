@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio Website',
-  description: 'My personal portfolio website showcasing my work and skills',
+  title: 'Vũ Nguyễn Khánh - Portfolio',
+  description:
+    'Portfolio cá nhân của Vũ Nguyễn Khánh - Showcasing my projects and skills in web development',
 };
 
 export default function RootLayout({
