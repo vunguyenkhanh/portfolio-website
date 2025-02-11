@@ -63,9 +63,9 @@ export function BioSection() {
           <motion.div variants={fadeIn} className="space-y-4 text-foreground/80">
             <p>
               I graduated with an engineering degree majoring in Information Technology at Hanoi
-              University of Science and Technology. I'm a passionate learner who's always willing to
-              learn and work across technologies and domains. I love to explore new technologies and
-              leverage them to solve real-life problems.
+              University of Science and Technology. I&apos;m a passionate learner who&apos;s always
+              willing to learn and work across technologies and domains. I love to explore new
+              technologies and leverage them to solve real-life problems.
             </p>
           </motion.div>
 
