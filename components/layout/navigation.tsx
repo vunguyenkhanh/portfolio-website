@@ -4,11 +4,16 @@ import { siteConfig } from '@/lib/config/site';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Briefcase, FileText, Home, Mail, Menu, User2, X } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-const icons = {
+type IconType = {
+  [key: string]: LucideIcon;
+};
+
+const icons: IconType = {
   home: Home,
   about: User2,
   projects: Briefcase,
@@ -16,26 +21,35 @@ const icons = {
   contact: Mail,
 };
 
-const MenuItem = ({ href, title, icon: Icon, isActive }: any) => {
+interface MenuItemProps {
+  href: string;
+  title: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  onClick?: () => void;
+}
+
+const MenuItem = ({ href, title, icon: Icon, isActive, onClick }: MenuItemProps) => {
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={cn(
         'group relative flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors rounded-full overflow-hidden',
-        isActive ? 'text-primary' : 'text-foreground/60 hover:text-primary',
+        isActive ? 'text-primary' : 'text-foreground/60 hover:text-primary'
       )}
     >
       <span
         className={cn(
           'absolute inset-0 bg-primary/5 transition-transform duration-300',
-          isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
+          isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
         )}
       />
       {Icon && (
         <Icon
           className={cn(
             'relative w-4 h-4 transition-transform duration-300',
-            'group-hover:scale-110',
+            'group-hover:scale-110'
           )}
         />
       )}
@@ -98,18 +112,12 @@ export function MobileNavigation() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Link
-                      href={item.href}
+                    <MenuItem
+                      {...item}
+                      icon={Icon}
+                      isActive={isActive}
                       onClick={() => setIsOpen(false)}
-                      className={cn(
-                        'flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors rounded-lg',
-                        'hover:text-primary hover:bg-primary/5',
-                        isActive ? 'text-primary bg-primary/5' : 'text-foreground/60',
-                      )}
-                    >
-                      {Icon && <Icon className="w-5 h-5" />}
-                      <span>{item.title}</span>
-                    </Link>
+                    />
                   </motion.div>
                 );
               })}
