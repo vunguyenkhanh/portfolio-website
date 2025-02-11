@@ -1,0 +1,81 @@
+Yêu cầu website portfolio
+
+1. Trang Chủ (Home Page)
+   - Ảnh đại diện: Hiển thị ảnh chân dung hoặc ảnh liên quan đến công việc để tạo sự thân thiện.
+   - Giới thiệu ngắn gọn: Một đoạn văn giới thiệu về bạn, nghề nghiệp, và mục tiêu nghề nghiệp.
+   - CTA (Call to Action): Nút hoặc liên kết nổi bật hướng người dùng đến các phần khác của trang như Dự án, CV, hoặc Liên hệ.
+
+2. Thanh Điều Hướng (Navigation Bar)
+   - Danh sách các mục:
+     - Home
+     - About (Giới thiệu)
+     - Projects (Dự án)
+     - Blog (Nếu có)
+     - Contact (Liên hệ)
+   - Thanh điều hướng cố định khi cuộn trang.
+   - Responsive: Thanh điều hướng phải tự động thay đổi hoặc thu gọn khi xem trên thiết bị di động.
+
+3. Trang Giới Thiệu (About)
+   - Thông tin cá nhân:
+     - Giới thiệu về bản thân (sở thích, tính cách, mục tiêu nghề nghiệp).
+     - Kinh nghiệm làm việc và các dự án nổi bật.
+     - Kỹ năng chuyên môn (có thể hiển thị theo dạng biểu đồ hoặc danh sách).
+     - Các chứng chỉ hoặc bằng cấp (nếu có).
+   - Ảnh hoặc Video: Cung cấp ảnh chân dung hoặc video giới thiệu bản thân.
+
+4. Trang Dự Án (Projects)
+   - Danh sách dự án:
+     - Mỗi dự án sẽ bao gồm:
+       - Tên dự án
+       - Mô tả ngắn gọn
+       - Các công nghệ sử dụng
+       - Hình ảnh hoặc video minh họa
+       - Liên kết đến GitHub hoặc trang demo (nếu có).
+   - Chức năng tìm kiếm và lọc dự án: Người dùng có thể tìm kiếm theo tên hoặc lọc theo loại dự án, công nghệ.
+   - Chức năng xem chi tiết: Mỗi dự án sẽ có một liên kết để người dùng có thể xem chi tiết hơn.
+
+5. CV (Resume)
+   - Hiển thị CV trực tuyến: Một phần hiển thị CV trực tuyến (có thể là một danh sách các công việc, dự án, hoặc học vấn).
+   - Tải xuống CV: Liên kết để người dùng tải CV dưới dạng PDF.
+   - Các phần của CV: Kinh nghiệm làm việc, kỹ năng, học vấn, chứng chỉ, dự án.
+
+6. Blog
+   - Danh sách bài viết: Các bài viết về chủ đề bạn quan tâm (công nghệ, lập trình, phát triển bản thân, v.v.).
+   - Phân loại và tìm kiếm: Cung cấp khả năng lọc bài viết theo thể loại hoặc từ khóa tìm kiếm.
+   - Chức năng bình luận: Cho phép người dùng để lại ý kiến hoặc bình luận dưới mỗi bài viết.
+
+7. Liên Hệ (Contact)
+   - Form liên hệ: Cung cấp form đơn giản cho người dùng gửi tin nhắn hoặc yêu cầu thông tin.
+     - Các trường cần có: Tên, Email, Nội dung tin nhắn.
+   - Thông tin liên hệ: Bao gồm địa chỉ email, số điện thoại (nếu muốn) và các liên kết mạng xã hội như LinkedIn, GitHub, Twitter, Facebook.
+   - Bản đồ (Google Maps): (Nếu cần thiết) Hiển thị địa chỉ cụ thể của bạn.
+
+8. Tính Năng Bổ Sung
+   - Dark Mode: Cho phép người dùng chuyển đổi giữa chế độ sáng và tối.
+   - Chứng thực (Testimonials): Thêm một phần để hiển thị các đánh giá từ đồng nghiệp, khách hàng, hoặc giáo viên.
+   - Tính năng tìm kiếm: Cho phép người dùng tìm kiếm các dự án hoặc bài viết trên trang web.
+   - SEO cơ bản: Tối ưu hóa SEO cho các trang (tiêu đề, mô tả, từ khóa).
+   - Đảm bảo tốc độ tải trang nhanh: Tối ưu hóa hình ảnh và tài nguyên để giảm thời gian tải.
+
+9. Responsive & Mobile-Friendly
+   - Thiết kế tương thích với các thiết bị di động và máy tính bảng.
+   - Kiểm tra trên các trình duyệt phổ biến: Đảm bảo trang web hoạt động tốt trên các trình duyệt như Chrome, Firefox, Safari, Edge.
+
+10. Google Analytics và Theo Dõi
+   - Tích hợp Google Analytics: Để theo dõi lượng truy cập và hành vi người dùng trên trang.
+   - Liên kết chia sẻ mạng xã hội: Cho phép người dùng dễ dàng chia sẻ nội dung của bạn lên các mạng xã hội.
+
+11. Các Chức Năng Nâng Cao (Optional)
+   - Animation và hiệu ứng cuộn: Tạo hiệu ứng cuộn khi người dùng di chuyển trang (parallax, fade in, slide in…).
+   - Thông báo hoặc Pop-up: Để người dùng biết khi có bài viết mới hoặc những thông báo quan trọng.
+   - Chức năng Đăng ký nhận bản tin: Cho phép người dùng đăng ký nhận email thông báo về các bài viết mới hoặc dự án mới.
+
+Công Nghệ:
+   - Frontend: Next.js, React, Shadcn (Tailwind CSS).
+   - Backend: API RESTful (Firebase).
+   - Database: Firebase.
+   - SEO: Next.js hỗ trợ tốt cho SEO với khả năng render phía server.
+
+Lưu ý:
+   - Thiết kế nên dễ nhìn, dễ sử dụng và đặc biệt là dễ tương tác với người dùng.
+   - Trang web cần phải dễ dàng cập nhật và bảo trì khi cần thiết.
