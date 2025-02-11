@@ -1,63 +1,45 @@
 'use client';
 
+import { siteConfig } from '@/lib/config/site';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Home, User2, Briefcase, FileText, Mail, Menu, X } from 'lucide-react';
+import { Briefcase, FileText, Home, Mail, Menu, User2, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-const menuItems = [
-  {
-    href: '/',
-    label: 'Home',
-    icon: Home,
-  },
-  {
-    href: '/about',
-    label: 'About',
-    icon: User2,
-  },
-  {
-    href: '/services',
-    label: 'Services',
-    icon: Briefcase,
-  },
-  {
-    href: '/works',
-    label: 'Works',
-    icon: FileText,
-  },
-  {
-    href: '/blog',
-    label: 'Blog',
-    icon: FileText,
-  },
-  {
-    href: '/contact',
-    label: 'Contact',
-    icon: Mail,
-  },
-];
+const icons = {
+  home: Home,
+  about: User2,
+  projects: Briefcase,
+  blog: FileText,
+  contact: Mail,
+};
 
-const MenuItem = ({ href, label, icon: Icon, isActive }: any) => {
+const MenuItem = ({ href, title, icon: Icon, isActive }: any) => {
   return (
     <Link
       href={href}
       className={cn(
         'group relative flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors rounded-full overflow-hidden',
-        isActive ? 'text-primary' : 'text-foreground/60 hover:text-primary'
+        isActive ? 'text-primary' : 'text-foreground/60 hover:text-primary',
       )}
     >
-      <span className={cn(
-        'absolute inset-0 bg-primary/5 transition-transform duration-300',
-        isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-      )} />
-      <Icon className={cn(
-        'relative w-4 h-4 transition-transform duration-300',
-        'group-hover:scale-110'
-      )} />
-      <span className="relative">{label}</span>
+      <span
+        className={cn(
+          'absolute inset-0 bg-primary/5 transition-transform duration-300',
+          isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
+        )}
+      />
+      {Icon && (
+        <Icon
+          className={cn(
+            'relative w-4 h-4 transition-transform duration-300',
+            'group-hover:scale-110',
+          )}
+        />
+      )}
+      <span className="relative">{title}</span>
     </Link>
   );
 };
@@ -67,10 +49,11 @@ export function Navigation() {
 
   return (
     <nav className="hidden md:flex items-center space-x-1">
-      {menuItems.map((item) => (
+      {siteConfig.nav.map((item) => (
         <MenuItem
           key={item.href}
           {...item}
+          icon={icons[item.href.replace('/', '') as keyof typeof icons]}
           isActive={pathname === item.href}
         />
       ))}
@@ -104,8 +87,8 @@ export function MobileNavigation() {
             className="absolute top-full left-0 right-0 p-4 mt-2 bg-background/95 backdrop-blur-sm border-t border-border/40 shadow-lg"
           >
             <nav className="grid gap-2">
-              {menuItems.map((item) => {
-                const Icon = item.icon;
+              {siteConfig.nav.map((item) => {
+                const Icon = icons[item.href.replace('/', '') as keyof typeof icons];
                 const isActive = pathname === item.href;
 
                 return (
@@ -121,11 +104,11 @@ export function MobileNavigation() {
                       className={cn(
                         'flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors rounded-lg',
                         'hover:text-primary hover:bg-primary/5',
-                        isActive ? 'text-primary bg-primary/5' : 'text-foreground/60'
+                        isActive ? 'text-primary bg-primary/5' : 'text-foreground/60',
                       )}
                     >
-                      <Icon className="w-5 h-5" />
-                      <span>{item.label}</span>
+                      {Icon && <Icon className="w-5 h-5" />}
+                      <span>{item.title}</span>
                     </Link>
                   </motion.div>
                 );

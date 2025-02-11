@@ -1,21 +1,13 @@
 'use client';
 
-import { motion, useScroll } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { Logo } from './logo';
+import { Logo } from '@/components/ui/logo';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { useScroll } from '@/lib/hooks/use-scroll';
+import { motion } from 'framer-motion';
 import { MobileNavigation, Navigation } from './navigation';
-import { ThemeToggle } from './theme-toggle';
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollY } = useScroll();
-
-  useEffect(() => {
-    const unsubscribe = scrollY.on('change', (latest) => {
-      setIsScrolled(latest > 0);
-    });
-    return () => unsubscribe();
-  }, [scrollY]);
+  const isScrolled = useScroll();
 
   return (
     <motion.header
