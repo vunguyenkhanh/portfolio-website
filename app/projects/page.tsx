@@ -1,10 +1,10 @@
-export default function ProjectsPage() {
+export default function Projects() {
   return (
-    <main className="flex min-h-screen flex-col">
-      <section className="container mx-auto px-4 py-16">
+    <main className="flex min-h-screen flex-col pt-16">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-4xl font-bold mb-8">My Projects</h1>
-        {/* Add Projects content here */}
-      </section>
+        {/* Projects content will be implemented later */}
+      </div>
     </main>
   );
 }

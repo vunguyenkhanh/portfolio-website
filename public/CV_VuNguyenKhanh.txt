@@ -1,0 +1,77 @@
+VU NGUYEN KHANH
+WEB DEVELOPER
+
+CONTACT
++84 944 426 469
+vunguyenkhanh.6599@gmail.com
+District 7, HCMC
+vunguyenkhanh (linkedin)
+kain6599 (Instagram)
+VuNguyenKhanh.Profile (facebook)
+
+I graduated with an engineering degree majoring in Information Technology at
+Hanoi University of Science and Technology. I'm a passionate learner who's
+always willing to learn and work across technologies and domains. I love to
+explore new technologies and leverage them to solve real-life problems.
+
+WORK EXPERIENCE
+- MONSTARLAB - FRESHER PHP DEVELOPER (2021 - 2022)
+	Developed, maintained web applications using PHP and Laravel framework.
+	Troubleshooted application and code issues.
+	Integrated data storage solutions.
+	Responded to integration requests from front-end developers.
+	Finalized back-end features and testing web applications.
+	Updated and altered application features to enhance performance.
+- FREELANCER - FRONTEND DEVELOPER (2023 - Now)
+  Building web applications with web development best practices.
+  Transforming app designs into front-end code with HTML, CSS, JavaScript.
+  Integrating UI components with APIs and databases.
+  Gathering and refining specifications and requirements based on technical
+  requirements or UX design.
+  Debugging errors, troubleshooting issues, and performing routineperformance
+  optimizations.
+
+EDUCATION
+HANOI UNIVERSITY OF SCIENCE AND TECHNOLOGY (2017 - 2022)
+Major: Information Technology
+Degree: Engineer
+
+SKILLS
+- FRONT-END
+Libraries & Framework: Bootstrap,
+Tailwind CSS, ReactJS, NextJS
+Language: HTML, CSS, JavaScript,
+TypeScript
+- BACK-END
+Libraries & Framework: Laravel
+Language: PHP, JavaScript,
+TypeScript
+Database: MySQL, PostgreSQL,
+MongoDB
+- TOOLS
+Version control: Git, Github
+Tasks control: Jira, Trello, Notion
+Mock up and design: Figma, Draw IO
+
+PERSONAL PROJECT
+- FOOD EXPRESS
+This is a responsive website interface for ordering food, it offers a simple and
+convenient experience to order your favorite dishes.
+Position: Front-end
+Technologies: HTML, CSS, JavaScript
+Source code: https://github.com/vunguyenkhanh/food-express
+Demo: https://vunguyenkhanh.github.io/food-express
+- TRAVELIO
+This is a responsive travel website interface for offering comprehensive guides to
+popular destinations worldwide, making trip planning easy and convenient.
+Position: Front-end
+Technologies: HTML, CSS, JavaScript
+Source code: https://github.com/vunguyenkhanh/travelio
+Demo: https://vunguyenkhanh.github.io/travelio
+- TEA HOUSE
+This is a responsive website interface that offers a variety of drinks and cakes and
+allows you to order the selected dishes.
+Position: Front-end
+Technologies: HTML, CSS, JavaScript, Normalize CSS
+Source code: https://github.com/vunguyenkhanh/tea-house
+Demo: https://vunguyenkhanh.github.io/tea-house
