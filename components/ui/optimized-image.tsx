@@ -5,8 +5,8 @@ import { useState } from 'react';
 interface OptimizedImageProps extends Omit<ImageProps, 'onLoad'> {
   wrapperClassName?: string;
   fill?: boolean;
-  width?: number | string;
-  height?: number | string;
+  width?: number | `${number}`;
+  height?: number | `${number}`;
 }
 
 export function OptimizedImage({
