@@ -55,6 +55,9 @@ Yêu cầu website portfolio
    - Tính năng tìm kiếm: Cho phép người dùng tìm kiếm các dự án hoặc bài viết trên trang web.
    - SEO cơ bản: Tối ưu hóa SEO cho các trang (tiêu đề, mô tả, từ khóa).
    - Đảm bảo tốc độ tải trang nhanh: Tối ưu hóa hình ảnh và tài nguyên để giảm thời gian tải.
+   - Thanh cuộn tùy chỉnh: Tạo thanh cuộn đẹp mắt và phù hợp với thiết kế của trang web.
+   - Nút "Scroll to Top": Thêm nút cuộn lên đầu trang khi người dùng cuộn xuống.
+   - Progress Bar: Hiển thị tiến trình cuộn trang ở phía trên cùng.
 
 9. Responsive & Mobile-Friendly
    - Thiết kế tương thích với các thiết bị di động và máy tính bảng.

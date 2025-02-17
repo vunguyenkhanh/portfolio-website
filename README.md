@@ -13,7 +13,7 @@ A modern, responsive portfolio website built with Next.js 14, React, and Tailwin
 - 📬 Contact form
 - 🎯 Infinite scroll and search functionality
 - 🔄 Smooth animations with Framer Motion
-- 📜 Custom scrollbar with OverlayScrollbars
+- 📜 Custom styled scrollbar with native browser support
 
 ## Tech Stack
 
@@ -26,7 +26,6 @@ A modern, responsive portfolio website built with Next.js 14, React, and Tailwin
 - **Form Handling:** [React Hook Form](https://react-hook-form.com/)
 - **Form Validation:** [Zod](https://zod.dev/)
 - **Blog Integration:** [Dev.to API](https://dev.to/api)
-- **Scrollbar:** [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/)
 
 ## Getting Started
 
