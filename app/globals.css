@@ -68,6 +68,43 @@
   }
 }
 
+/* Custom Scrollbar Styles */
+.os-theme-dark {
+  --os-size: 8px;
+  --os-padding-perpendicular: 2px;
+  --os-padding-axis: 2px;
+  --os-track-border-radius: 8px;
+  --os-track-bg: hsl(var(--muted));
+  --os-track-bg-hover: hsl(var(--muted));
+  --os-track-bg-active: hsl(var(--muted));
+  --os-track-border: none;
+  --os-track-border-hover: none;
+  --os-track-border-active: none;
+  --os-handle-border-radius: 8px;
+  --os-handle-bg: hsl(var(--primary) / 0.5);
+  --os-handle-bg-hover: hsl(var(--primary) / 0.7);
+  --os-handle-bg-active: hsl(var(--primary));
+  --os-handle-border: none;
+  --os-handle-border-hover: none;
+  --os-handle-border-active: none;
+  --os-handle-min-size: 40px;
+  --os-handle-max-size: none;
+  --os-handle-perpendicular-size: 100%;
+  --os-handle-perpendicular-size-hover: 100%;
+  --os-handle-perpendicular-size-active: 100%;
+  --os-handle-interactive-area-offset: 3px;
+}
+
+/* Hide scrollbar for WebKit browsers when OverlayScrollbars is initialized */
+.os-initialized::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox when OverlayScrollbars is initialized */
+.os-initialized {
+  scrollbar-width: none;
+}
+
 @layer base {
   * {
     @apply border-border;

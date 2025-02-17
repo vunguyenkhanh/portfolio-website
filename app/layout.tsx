@@ -1,5 +1,6 @@
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
+import { ScrollWrapper } from '@/components/layout/scroll-wrapper';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
@@ -47,9 +48,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="flex-grow pt-16">{children}</main>
-          <Footer />
+          <ScrollWrapper>
+            <Header />
+            <main className="flex-grow pt-16">{children}</main>
+            <Footer />
+          </ScrollWrapper>
         </ThemeProvider>
       </body>
     </html>
