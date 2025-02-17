@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="flex min-h-screen flex-col pt-16">
+    <main className="flex min-h-screen flex-col">
       {/* Background Pattern */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern" />

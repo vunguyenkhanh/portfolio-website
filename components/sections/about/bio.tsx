@@ -42,6 +42,7 @@ export function BioSection() {
               fill
               className="object-cover rounded-2xl border-8 border-background"
               priority
+              sizes="(min-width: 1024px) 384px, 256px"
             />
           </motion.div>
         </motion.div>

@@ -23,7 +23,6 @@ A modern, responsive portfolio website built with Next.js 14, React, and Tailwin
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
 - **Icons:** [Lucide Icons](https://lucide.dev/)
 - **Fonts:** [Geist Font](https://vercel.com/font)
-- **Backend:** [Firebase](https://firebase.google.com/)
 - **Form Handling:** [React Hook Form](https://react-hook-form.com/)
 - **Form Validation:** [Zod](https://zod.dev/)
 - **Blog Integration:** [Dev.to API](https://dev.to/api)
@@ -57,13 +56,6 @@ pnpm install
 
 ```env
 NEXT_PUBLIC_BASE_URL=your_website_url
-NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_firebase_measurement_id
 ```
 
 4. Run the development server:
@@ -92,7 +84,6 @@ pnpm dev
 │   └── ui/              # UI components
 ├── lib/                 # Utility functions
 │   ├── config/         # Configuration
-│   ├── firebase/       # Firebase setup
 │   ├── services/       # API services
 │   └── utils/          # Helper functions
 ├── public/             # Static files

@@ -89,7 +89,7 @@ export function HeroSection() {
           className="relative mx-auto w-full max-w-lg lg:mx-0 lg:ml-auto"
         >
           <motion.div
-            className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary/20 to-accent/20 blur-3xl"
+            className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 to-accent/20 blur-3xl"
             whileHover={{ scale: 1.1 }}
           />
           <motion.div
@@ -101,8 +101,9 @@ export function HeroSection() {
               src="/avatar.png"
               alt="Vu Nguyen Khanh - Web Developer"
               fill
-              className="object-cover rounded-2xl border-8 border-background"
+              className="object-cover rounded-full border-8 border-background"
               priority
+              sizes="(min-width: 1024px) 512px, (min-width: 768px) 384px, 256px"
             />
           </motion.div>
         </motion.div>

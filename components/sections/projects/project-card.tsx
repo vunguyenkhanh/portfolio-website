@@ -40,6 +40,7 @@ export function ProjectCard({
           alt={title}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-110"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
       </div>
