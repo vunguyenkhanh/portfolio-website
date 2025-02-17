@@ -1,11 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -25,18 +21,14 @@ export function Navigation() {
   return (
     <nav className="hidden md:flex items-center gap-1">
       {links.map((link) => {
-        const isActive = pathname === link.href;
+        const isActive = link.href === '/' ? pathname === '/' : pathname?.startsWith(link.href);
 
         return (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="relative px-3 py-2"
-          >
+          <Link key={link.href} href={link.href} className="relative px-3 py-2">
             <motion.span
               className={cn(
                 'relative z-10 text-sm transition-colors duration-200',
-                isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+                isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
               )}
               whileHover={{ y: -2 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -68,10 +60,7 @@ export function MobileNavigation() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          className="md:hidden w-9 px-0"
-        >
+        <Button variant="ghost" className="md:hidden w-9 px-0">
           <svg
             className="h-5 w-5"
             fill="none"
@@ -91,7 +80,7 @@ export function MobileNavigation() {
       <SheetContent side="right" className="w-[300px] sm:w-[400px]">
         <nav className="flex flex-col gap-4 mt-8">
           {links.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = link.href === '/' ? pathname === '/' : pathname?.startsWith(link.href);
 
             return (
               <Link
@@ -100,9 +89,7 @@ export function MobileNavigation() {
                 onClick={() => setOpen(false)}
                 className={cn(
                   'text-lg font-medium transition-colors hover:text-foreground px-2 py-1 rounded-md',
-                  isActive
-                    ? 'text-foreground bg-muted'
-                    : 'text-muted-foreground'
+                  isActive ? 'text-foreground bg-muted' : 'text-muted-foreground',
                 )}
               >
                 {link.label}
