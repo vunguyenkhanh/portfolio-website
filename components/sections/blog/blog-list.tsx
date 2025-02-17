@@ -1,9 +1,15 @@
 'use client';
 
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import type { BlogPost } from '@/lib/services/blog';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import debounce from 'lodash/debounce';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { BlogCard } from './blog-card';
+
+const POSTS_PER_PAGE = 9;
 
 const container = {
   hidden: { opacity: 0 },
@@ -25,31 +31,87 @@ interface BlogListProps {
 }
 
 export function BlogList({ initialPosts }: BlogListProps) {
+  const router = useRouter();
   const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
+  const [displayedPosts, setDisplayedPosts] = useState<BlogPost[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const loadingRef = useRef(false);
+
+  // Intersection Observer for infinite scroll
+  const { ref: loadMoreRef, inView } = useInView({
+    threshold: 0,
+    rootMargin: '100px',
+  });
+
+  // Debounced search
+  const debouncedSearch = useCallback(
+    debounce((query: string) => {
+      setSearchQuery(query);
+      setPage(1);
+    }, 300),
+    [],
+  );
 
   // Get unique categories from all posts
-  const categories = Array.from(
-    new Set(posts.flatMap((post) => post.categories)),
-  ).sort();
+  const categories = useMemo(() => {
+    return Array.from(new Set(posts.flatMap((post) => post.categories))).sort();
+  }, [posts]);
 
-  const filteredPosts = posts.filter((post) => {
-    const matchesCategory = selectedCategory
-      ? post.categories.includes(selectedCategory)
-      : true;
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  // Filter posts based on category and search
+  const filteredPosts = useMemo(() => {
+    return posts.filter((post) => {
+      const matchesCategory = selectedCategory ? post.categories.includes(selectedCategory) : true;
+      const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [posts, selectedCategory, searchQuery]);
+
+  // Load more posts when scrolling
+  useEffect(() => {
+    if (inView && !loadingRef.current) {
+      loadingRef.current = true;
+      setIsLoading(true);
+
+      // Simulate API call delay
+      setTimeout(() => {
+        const nextPosts = filteredPosts.slice(0, page * POSTS_PER_PAGE);
+        setDisplayedPosts(nextPosts);
+        setPage((prev) => prev + 1);
+        setIsLoading(false);
+        loadingRef.current = false;
+      }, 500);
+    }
+  }, [inView, filteredPosts, page]);
+
+  // Reset displayed posts when filters change
+  useEffect(() => {
+    setDisplayedPosts(filteredPosts.slice(0, POSTS_PER_PAGE));
+    setPage(1);
+  }, [filteredPosts]);
 
   const handleFilter = async (category: string | null) => {
     setIsLoading(true);
     setSelectedCategory(category);
-    // Simulate loading state
+    setPage(1);
     await new Promise((resolve) => setTimeout(resolve, 300));
     setIsLoading(false);
   };
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSearchQuery('');
+        handleFilter(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <motion.div
@@ -60,21 +122,26 @@ export function BlogList({ initialPosts }: BlogListProps) {
     >
       {/* Filters */}
       <div className="flex flex-col gap-6">
-        {/* Search */}
+        {/* Search with loading indicator */}
         <div className="relative">
           <input
             type="text"
-            placeholder="Search articles..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search articles... (Press Esc to clear)"
+            onChange={(e) => debouncedSearch(e.target.value)}
             className="w-full rounded-lg border border-border bg-card/50 px-4 py-2 pl-10 backdrop-blur focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:max-w-md"
+            aria-label="Search articles"
           />
+          {isLoading && (
+            <div className="absolute right-3 top-2.5">
+              <LoadingSpinner size="sm" variant="primary" />
+            </div>
+          )}
           <svg
             className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -85,9 +152,17 @@ export function BlogList({ initialPosts }: BlogListProps) {
           </svg>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap gap-2">
-          <button
+        {/* Category Filter with animations */}
+        <motion.div
+          className="flex flex-wrap gap-2"
+          variants={container}
+          initial="hidden"
+          animate="show"
+          role="group"
+          aria-label="Filter by category"
+        >
+          <motion.button
+            variants={item}
             key="all"
             onClick={() => handleFilter(null)}
             disabled={isLoading}
@@ -96,11 +171,13 @@ export function BlogList({ initialPosts }: BlogListProps) {
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-card/50 text-muted-foreground hover:bg-card/80 backdrop-blur'
             } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            aria-pressed={selectedCategory === null}
           >
             All
-          </button>
+          </motion.button>
           {categories.map((category) => (
-            <button
+            <motion.button
+              variants={item}
               key={category}
               onClick={() => handleFilter(category)}
               disabled={isLoading}
@@ -109,62 +186,97 @@ export function BlogList({ initialPosts }: BlogListProps) {
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-card/50 text-muted-foreground hover:bg-card/80 backdrop-blur'
               } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              aria-pressed={selectedCategory === category}
             >
               {category}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
       </div>
 
-      {/* Blog Grid */}
+      {/* Blog Grid with Infinite Scroll */}
       <AnimatePresence mode="wait">
-        <motion.div
-          key={`${selectedCategory}-${searchQuery}`}
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {filteredPosts.map((post) => (
-            <motion.div key={post.slug} variants={item}>
-              <BlogCard {...post} />
-            </motion.div>
-          ))}
-        </motion.div>
+        {displayedPosts.length > 0 ? (
+          <motion.div
+            key="content"
+            variants={container}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {displayedPosts.map((post) => (
+              <motion.div
+                key={post.slug}
+                variants={item}
+                whileHover={{ y: -5 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <BlogCard {...post} />
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-xl bg-card/50 p-8 text-center backdrop-blur"
+          >
+            <p className="text-lg text-muted-foreground">
+              No articles found matching your criteria.
+            </p>
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                handleFilter(null);
+              }}
+              className="mt-4 text-sm text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            >
+              Clear filters
+            </button>
+          </motion.div>
+        )}
       </AnimatePresence>
 
-      {/* No Results */}
-      {filteredPosts.length === 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="rounded-xl bg-card/50 p-8 text-center backdrop-blur"
-        >
-          <p className="text-lg text-muted-foreground">No articles found matching your criteria.</p>
-          <button
-            onClick={() => {
-              setSearchQuery('');
-              handleFilter(null);
-            }}
-            disabled={isLoading}
-            className="mt-4 text-sm text-primary hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Clear filters
-          </button>
-        </motion.div>
+      {/* Load More Trigger */}
+      {displayedPosts.length < filteredPosts.length && (
+        <div ref={loadMoreRef} className="h-10">
+          {isLoading && (
+            <LoadingSpinner
+              size="lg"
+              variant="primary"
+              text="Loading more articles..."
+              className="py-4"
+            />
+          )}
+        </div>
       )}
 
-      {/* Loading Overlay */}
-      {isLoading && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-sm"
+      {/* Scroll to Top Button */}
+      <motion.button
+        className="fixed bottom-4 right-4 rounded-full bg-primary p-3 text-primary-foreground shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        aria-label="Scroll to top"
+      >
+        <svg
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
         >
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-        </motion.div>
-      )}
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
+        </svg>
+      </motion.button>
     </motion.div>
   );
 }

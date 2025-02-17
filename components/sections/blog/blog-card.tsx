@@ -1,80 +1,80 @@
 'use client';
 
-import type { BlogPost } from '@/lib/services/blog';
+import { OptimizedImage } from '@/components/ui/optimized-image';
+import { BlogPost } from '@/lib/services/blog';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
+import { memo } from 'react';
 
-export function BlogCard({
-  title,
-  description,
-  date,
-  readTime,
-  categories,
-  imageUrl,
-  author,
-  link,
-}: BlogPost) {
+export const BlogCard = memo(function BlogCard(post: BlogPost) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="group relative overflow-hidden rounded-xl bg-card"
-    >
-      {/* Blog Image */}
-      <Link href={link} className="relative block h-48 w-full overflow-hidden" target="_blank">
-        <Image
-          src={imageUrl}
-          alt={title}
-          width={800}
-          height={400}
-          priority={imageUrl === '/blog/default-cover.svg'}
-          className="object-cover transition-transform duration-300 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-      </Link>
+    <Link href={post.link} target="_blank" rel="noopener noreferrer">
+      <motion.article
+        className="group relative h-full overflow-hidden rounded-xl bg-card/50 backdrop-blur transition-all hover:bg-card/80"
+        whileHover={{ y: -5 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        {/* Image */}
+        <div className="relative aspect-video">
+          <OptimizedImage
+            src={post.imageUrl}
+            alt={post.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
+        </div>
 
-      {/* Content */}
-      <div className="p-6">
-        {/* Categories & Date */}
-        <div className="flex flex-wrap items-center gap-2">
-          <div className="flex flex-wrap gap-2 flex-1">
-            {categories.map((category) => (
+        {/* Content */}
+        <div className="p-6">
+          {/* Categories */}
+          <div className="mb-3 flex flex-wrap gap-2">
+            {post.categories.map((category) => (
               <span
                 key={category}
-                className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+                className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
               >
                 {category}
               </span>
             ))}
           </div>
-          <span className="text-xs text-muted-foreground shrink-0">{date}</span>
-        </div>
 
-        {/* Title & Description */}
-        <Link href={link} className="mt-4 block space-y-2" target="_blank">
-          <h3 className="line-clamp-2 text-xl font-semibold transition-colors group-hover:text-primary">
-            {title}
-          </h3>
-          <p className="line-clamp-2 text-sm text-muted-foreground">{description}</p>
-        </Link>
+          {/* Title */}
+          <h2 className="mb-2 text-xl font-semibold tracking-tight transition-colors group-hover:text-primary">
+            {post.title}
+          </h2>
 
-        {/* Author & Read Time */}
-        <div className="mt-6 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Image
-              src={author.avatar}
-              alt={author.name}
-              width={32}
-              height={32}
-              className="rounded-full"
-            />
-            <span className="text-sm font-medium">{author.name}</span>
+          {/* Description */}
+          <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">{post.description}</p>
+
+          {/* Metadata */}
+          <div className="mt-auto flex items-center justify-between text-sm text-muted-foreground">
+            {/* Author */}
+            <div className="flex items-center space-x-2">
+              <div className="relative h-6 w-6 overflow-hidden rounded-full">
+                <OptimizedImage
+                  src={post.author.avatar}
+                  alt={post.author.name}
+                  fill
+                  className="object-cover"
+                  sizes="24px"
+                  loading="lazy"
+                />
+              </div>
+              <span>{post.author.name}</span>
+            </div>
+
+            {/* Date and Read Time */}
+            <div className="flex items-center space-x-2 text-xs">
+              <time dateTime={new Date(post.date).toISOString()}>{post.date}</time>
+              <span>•</span>
+              <span>{post.readTime}</span>
+            </div>
           </div>
-          <span className="text-xs text-muted-foreground">{readTime} read</span>
         </div>
-      </div>
-    </motion.article>
+      </motion.article>
+    </Link>
   );
-}
+});

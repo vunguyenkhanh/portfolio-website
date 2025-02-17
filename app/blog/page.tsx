@@ -1,17 +1,22 @@
-import { Metadata } from 'next';
 import { BlogList } from '@/components/sections/blog/blog-list';
+import { BlogSchema } from '@/components/sections/blog/blog-schema';
+import { createMetadata } from '@/components/shared/metadata';
 import { getDevToPosts } from '@/lib/services/blog';
-
-export const metadata: Metadata = {
-  title: 'Blog | Vu Nguyen Khanh',
-  description:
-    'Read my latest articles about web development, programming tips, and tech insights.',
-};
+import { Metadata } from 'next';
 
 export const revalidate = 3600; // Revalidate every hour
 
+export async function generateMetadata(): Promise<Metadata> {
+  return createMetadata({
+    title: 'Blog',
+    description: 'Read my latest articles about web development, software engineering, and more.',
+    keywords: ['blog', 'articles', 'web development', 'programming', 'tech'],
+  });
+}
+
 export default async function BlogPage() {
   const posts = await getDevToPosts();
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://vunguyenkhanh.com';
   const totalReadTime = posts.reduce(
     (total, post) => total + parseInt(post.readTime.replace(' min', '')),
     0,
@@ -36,8 +41,8 @@ export default async function BlogPage() {
           <div className="relative space-y-2">
             <h1 className="text-4xl font-bold sm:text-5xl">Blog</h1>
             <p className="text-lg text-muted-foreground max-w-3xl">
-              Sharing my thoughts and experiences about web development, programming, and technology.
-              Stay updated with the latest trends and best practices.
+              Sharing my thoughts and experiences about web development, programming, and
+              technology. Stay updated with the latest trends and best practices.
             </p>
           </div>
 
@@ -50,7 +55,7 @@ export default async function BlogPage() {
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-primary">
-                  {Array.from(new Set(posts.map((post) => post.category))).length}
+                  {Array.from(new Set(posts.flatMap((post) => post.categories))).length}
                 </p>
                 <p className="text-sm text-muted-foreground">Categories</p>
               </div>
@@ -69,6 +74,7 @@ export default async function BlogPage() {
           <div className="absolute -right-4 top-1/2 h-48 w-48 rounded-full bg-accent/5 blur-3xl" />
 
           <BlogList initialPosts={posts} />
+          <BlogSchema posts={posts} baseUrl={baseUrl} />
         </div>
       </div>
     </main>

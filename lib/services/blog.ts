@@ -17,16 +17,18 @@ export interface BlogPost {
 }
 
 // Extend Parser type to include custom fields
-interface CustomFeed extends Parser.Output<any> {
-  items: Array<{
-    creator?: string;
-    'content:encoded'?: string;
-    categories?: string[];
-    pubDate?: string;
-    link?: string;
-    title?: string;
-    contentSnippet?: string;
-  }>;
+interface CustomFeed extends Parser.Output<CustomItem> {
+  items: CustomItem[];
+}
+
+interface CustomItem {
+  creator?: string;
+  'content:encoded'?: string;
+  categories?: string[];
+  pubDate?: string;
+  link?: string;
+  title?: string;
+  contentSnippet?: string;
 }
 
 // Create parser instance with custom fields
