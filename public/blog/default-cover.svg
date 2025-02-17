@@ -62,15 +62,6 @@
     >
       Blog Post
     </text>
-    <text
-      y="40"
-      fill="white"
-      font-family="system-ui, -apple-system, sans-serif"
-      font-size="18"
-      fill-opacity="0.7"
-    >
-      Coming Soon
-    </text>
   </g>
 
   <!-- Decorative Elements -->

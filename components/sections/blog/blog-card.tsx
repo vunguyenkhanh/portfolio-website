@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { memo } from 'react';
 
 export const BlogCard = memo(function BlogCard(post: BlogPost) {
+  const isDefaultCover = post.imageUrl === '/blog/default-cover.svg';
+
   return (
     <Link href={post.link} target="_blank" rel="noopener noreferrer">
       <motion.article
@@ -15,14 +17,16 @@ export const BlogCard = memo(function BlogCard(post: BlogPost) {
         whileTap={{ scale: 0.98 }}
       >
         {/* Image */}
-        <div className="relative aspect-video">
+        <div className="relative aspect-video w-full">
           <OptimizedImage
             src={post.imageUrl}
             alt={post.title}
             fill
+            priority={isDefaultCover}
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-            loading="lazy"
+            loading={isDefaultCover ? undefined : 'lazy'}
+            wrapperClassName="h-full"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
         </div>
@@ -53,14 +57,15 @@ export const BlogCard = memo(function BlogCard(post: BlogPost) {
           <div className="mt-auto flex items-center justify-between text-sm text-muted-foreground">
             {/* Author */}
             <div className="flex items-center space-x-2">
-              <div className="relative h-6 w-6 overflow-hidden rounded-full">
+              <div className="relative h-6 w-6">
                 <OptimizedImage
                   src={post.author.avatar}
                   alt={post.author.name}
                   fill
-                  className="object-cover"
+                  className="rounded-full object-cover"
                   sizes="24px"
                   loading="lazy"
+                  wrapperClassName="h-full"
                 />
               </div>
               <span>{post.author.name}</span>
