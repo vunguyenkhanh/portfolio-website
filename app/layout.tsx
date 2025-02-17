@@ -19,6 +19,16 @@ export const metadata: Metadata = {
   title: 'Vũ Nguyễn Khánh - Portfolio',
   description:
     'Portfolio cá nhân của Vũ Nguyễn Khánh - Showcasing my projects and skills in web development',
+  icons: {
+    icon: [
+      {
+        url: '/images/favicon.png',
+        href: '/images/favicon.png',
+      },
+    ],
+    shortcut: '/images/favicon.png',
+    apple: '/images/favicon.png',
+  },
 };
 
 export default function RootLayout({

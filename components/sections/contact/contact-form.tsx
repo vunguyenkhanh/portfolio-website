@@ -29,18 +29,27 @@ export function ContactForm() {
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async (formData: ContactFormData) => {
     setIsSubmitting(true);
     setError(null);
 
     try {
-      // TODO: Implement form submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Simulate API call with the form data
+      console.log('Submitting form data:', formData);
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
       setSubmitted(true);
       reset();
-    } catch (err) {
-      setError('Failed to send message. Please try again later.');
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to send message. Please try again later.';
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }

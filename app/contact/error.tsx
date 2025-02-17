@@ -2,10 +2,11 @@
 
 import { ErrorBoundary as BaseErrorBoundary } from '@/components/ui/error-boundary';
 
-export default function ErrorBoundary(props: any) {
+export default function ErrorBoundary({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <BaseErrorBoundary
-      {...props}
+      error={error}
+      reset={reset}
       title="Contact Page Error"
       message="We couldn't load the contact form. Please check your connection and try again."
       buttonText="Reload form"

@@ -5,13 +5,11 @@ import { motion } from 'framer-motion';
 
 interface SocialLinksProps {
   className?: string;
-  iconClassName?: string;
   showLabels?: boolean;
 }
 
 export function SocialLinks({
   className = '',
-  iconClassName = '',
   showLabels = false,
 }: SocialLinksProps) {
   return (

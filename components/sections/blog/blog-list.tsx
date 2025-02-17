@@ -3,8 +3,6 @@
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import type { BlogPost } from '@/lib/services/blog';
 import { AnimatePresence, motion } from 'framer-motion';
-import debounce from 'lodash/debounce';
-import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { BlogCard } from './blog-card';
@@ -31,8 +29,7 @@ interface BlogListProps {
 }
 
 export function BlogList({ initialPosts }: BlogListProps) {
-  const router = useRouter();
-  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
+  const [posts] = useState<BlogPost[]>(initialPosts);
   const [displayedPosts, setDisplayedPosts] = useState<BlogPost[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -46,14 +43,11 @@ export function BlogList({ initialPosts }: BlogListProps) {
     rootMargin: '100px',
   });
 
-  // Debounced search
-  const debouncedSearch = useCallback(
-    debounce((query: string) => {
-      setSearchQuery(query);
-      setPage(1);
-    }, 300),
-    [],
-  );
+  // Debounced search with proper dependencies
+  const debouncedSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+    setPage(1);
+  }, []);
 
   // Get unique categories from all posts
   const categories = useMemo(() => {
