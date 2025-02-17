@@ -105,11 +105,27 @@
   scrollbar-width: none;
 }
 
+/* Ensure proper sizing for OverlayScrollbars */
+.os-viewport {
+  height: 100% !important;
+}
+
+.os-content-glue {
+  height: auto !important;
+  width: 100% !important;
+}
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Ensure proper height for scrollable content */
+  html,
+  body {
+    @apply h-full;
   }
 }
