@@ -1,6 +1,8 @@
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { ScrollWrapper } from '@/components/layout/scroll-wrapper';
+import { ClassProvider } from '@/components/providers/class-provider';
+import { ScrollToTop } from '@/components/ui/scroll-to-top';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -37,10 +39,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
-      >
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head />
+      <body className="antialiased min-h-screen flex flex-col">
+        <ClassProvider />
+        <ScrollToTop />
         <ScrollWrapper>
           <Header />
           <main className="flex-grow pt-16">{children}</main>
