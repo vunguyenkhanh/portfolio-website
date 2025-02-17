@@ -51,7 +51,6 @@ Yêu cầu website portfolio
    - Bản đồ (Google Maps): (Nếu cần thiết) Hiển thị địa chỉ cụ thể của bạn.
 
 8. Tính Năng Bổ Sung
-   - Dark Mode: Cho phép người dùng chuyển đổi giữa chế độ sáng và tối.
    - Chứng thực (Testimonials): Thêm một phần để hiển thị các đánh giá từ đồng nghiệp, khách hàng, hoặc giáo viên.
    - Tính năng tìm kiếm: Cho phép người dùng tìm kiếm các dự án hoặc bài viết trên trang web.
    - SEO cơ bản: Tối ưu hóa SEO cho các trang (tiêu đề, mô tả, từ khóa).
@@ -72,21 +71,29 @@ Yêu cầu website portfolio
 
 Công Nghệ:
    - Frontend: Next.js, React, Shadcn (Tailwind CSS).
-   - Backend: API RESTful (Firebase).
-   - Database: Firebase.
    - SEO: Next.js hỗ trợ tốt cho SEO với khả năng render phía server.
 
 Color Palette:
-    #03045E
-    #023E8A
-    #0077B6
-    #0096C7
-    #00B4D8
-    #48CAE4
-    #90E0EF
-    #ADE8F4
-    #CAF0F8
-    #FFFFFF
+    --background: 203 100% 98%
+    --foreground: 222 47% 11%
+    --muted: 210 40% 96.1%
+    --muted-foreground: 215.4 16.3% 46.9%
+    --popover: 0 0% 100%
+    --popover-foreground: 222.2 47.4% 11.2%
+    --border: 214.3 31.8% 91.4%
+    --input: 214.3 31.8% 91.4%
+    --card: 0 0% 100%
+    --card-foreground: 222.2 47.4% 11.2%
+    --primary: 201 100% 36%
+    --primary-foreground: 210 40% 98%
+    --secondary: 199 100% 42%
+    --secondary-foreground: 222.2 47.4% 11.2%
+    --accent: 199 100% 47%
+    --accent-foreground: 222.2 47.4% 11.2%
+    --destructive: 0 100% 50%
+    --destructive-foreground: 210 40% 98%
+    --ring: 215 20.2% 65.1%
+    --radius: 0.5rem
 
 Lưu ý:
    - Thiết kế nên dễ nhìn, dễ sử dụng và đặc biệt là dễ tương tác với người dùng.

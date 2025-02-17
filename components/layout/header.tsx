@@ -1,7 +1,6 @@
 'use client';
 
 import { Logo } from '@/components/ui/logo';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { useScroll } from '@/lib/hooks/use-scroll';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -30,10 +29,6 @@ export function Header() {
           <Navigation />
 
           <div className="flex items-center gap-4">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <ThemeToggle />
-            </motion.div>
-
             <MobileNavigation />
 
             <Link href="/contact">

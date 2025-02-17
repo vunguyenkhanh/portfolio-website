@@ -5,15 +5,15 @@ A modern, responsive portfolio website built with Next.js 14, React, and Tailwin
 ## Features
 
 - 🎨 Modern UI/UX with Tailwind CSS and Shadcn UI
-- 🌙 Dark/Light mode with next-themes
 - 📱 Fully responsive design
 - ⚡ Fast page loads with Next.js 14 App Router
 - 📝 Blog integration with Dev.to API
 - 🔍 SEO optimized with Next.js Metadata
-- 📊 Project showcase
+- 📊 Project showcase with filtering
 - 📬 Contact form
 - 🎯 Infinite scroll and search functionality
 - 🔄 Smooth animations with Framer Motion
+- 📜 Custom scrollbar with OverlayScrollbars
 
 ## Tech Stack
 
@@ -26,6 +26,7 @@ A modern, responsive portfolio website built with Next.js 14, React, and Tailwin
 - **Form Handling:** [React Hook Form](https://react-hook-form.com/)
 - **Form Validation:** [Zod](https://zod.dev/)
 - **Blog Integration:** [Dev.to API](https://dev.to/api)
+- **Scrollbar:** [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/)
 
 ## Getting Started
 
@@ -93,11 +94,7 @@ pnpm dev
 
 ## Deployment
 
-The website can be deployed on any platform that supports Next.js, such as:
-
-- [Vercel](https://vercel.com)
-- [Netlify](https://netlify.com)
-- [Railway](https://railway.app)
+The website is deployed on GitHub Pages. Every push to the main branch triggers an automatic build and deployment through GitHub Actions.
 
 ## Contributing
 
