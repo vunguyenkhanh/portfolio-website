@@ -1,6 +1,5 @@
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
-import { ScrollWrapper } from '@/components/layout/scroll-wrapper';
 import { ClassProvider } from '@/components/providers/class-provider';
 import { ScrollToTop } from '@/components/ui/scroll-to-top';
 import '@/styles/globals.css';
@@ -48,11 +47,9 @@ export default function RootLayout({
       <body className="antialiased min-h-screen flex flex-col">
         <ClassProvider />
         <ScrollToTop />
-        <ScrollWrapper>
-          <Header />
-          <main className="flex-grow pt-16">{children}</main>
-          <Footer />
-        </ScrollWrapper>
+        <Header />
+        <main className="flex-grow pt-16">{children}</main>
+        <Footer />
       </body>
     </html>
   );
